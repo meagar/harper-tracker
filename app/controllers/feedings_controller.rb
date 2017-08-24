@@ -54,7 +54,7 @@ class FeedingsController < ApplicationController
 
   def create_params
     params.require(:feeding).permit(:amount, :formula, :milk, :notes).tap do |p|
-      p[:start_time] = Time.parse([params[:feeding][:start_hour], params[:feeding][:start_minute]].join(':'))
+      p[:start_time] = Time.parse([params[:feeding][:start_hour], params[:feeding][:start_minute]].join(':') + params[:feeding].delete(:start_ampm))
     end
   end
 
