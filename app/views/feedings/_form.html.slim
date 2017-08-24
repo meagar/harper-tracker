@@ -13,7 +13,7 @@
       input type="text" class="form-control" readonly=true value=(l DateTime.now)
   .form-group
     label Start Time
-    .time-picker data-time=(feeding.start_time ? feeding.start_time : Time.parse(rounded_time(Time.now)))
+    .time-picker data-time=(feeding.start_time ? feeding.start_time : Time.now)
       a#back-time.btn.btn-primary.form-control href="#" <
       = f.text_field :start_hour, value: '', class: 'form-control'
       span.seperator
@@ -45,23 +45,21 @@
 javascript:
   $(function () {
     var time = new Date($('.time-picker').data('time'));
-    
+
+  
     function updateClock() {
       var hours = time.getHours();
-      
-      var ampm = hours >= 12 ? 'pm' : 'am';
-      
-      if (hours > 12) {
-        hours -= 12;
-      }  
-    
       var minutes = time.getMinutes();
-      if (minutes < 10) minutes = '0' + minutes.toString()
-    
       
+      var m = (parseInt((minutes + 7.5)/15) * 15) % 60;
+      var h = minutes > 52 ? (hours === 23 ? 0 : ++hours) : hours;  
+  
+      if (m < 9) m = '0' + m.toString();
+      var ampm = h >= 12 ? 'pm' : 'am';
+      if (h > 12) h -= 12;
       
-      $('#feeding_start_hour').val(hours);
-      $('#feeding_start_minute').val(minutes);
+      $('#feeding_start_hour').val(h);
+      $('#feeding_start_minute').val(m);
       $('#feeding_start_ampm').val(ampm);
     }
 

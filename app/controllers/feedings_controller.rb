@@ -45,7 +45,7 @@ class FeedingsController < ApplicationController
   private
 
   def feeding_link(feeding)
-    "<a href=\"#{url_for(@feeding)}\">#{rounded_time(@feeding.created_at)} feeding</a>"
+    "<a href=\"#{url_for(@feeding)}\">#{l(@feeding.start_time, format: :short_time)} feeding</a>"
   end
 
   def find_feeding

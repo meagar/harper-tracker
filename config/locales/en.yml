@@ -3,3 +3,4 @@ en:
     formats:
       default: '%B %e, %l:%M %P'
       long: '%l:%M %P on %B, %e'
+      short_time: '%l:%M %P'
