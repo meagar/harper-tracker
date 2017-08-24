@@ -5,9 +5,10 @@
     .form-group
       h4 It's #{l Time.now, format: :long}
       hr
-    .form-group
-      h4 Last feed #{time_ago_in_words(@last_feed.start_time)} ago
-      h5 at #{l @last_feed.start_time}
+    - if @last_feed  
+      .form-group
+        h4 Last feed #{time_ago_in_words(@last_feed.start_time)} ago
+        h5 at #{l @last_feed.start_time}
     .form-group  
       a.form-control.btn.btn-primary.btn-block href="/feedings/new" Record Feeding
       
