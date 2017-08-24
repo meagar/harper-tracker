@@ -1,0 +1,12 @@
+- { notice: 'success', error: 'danger' }.each do |key, class_name|
+  - if flash[key]
+    .alert.alert-dismissible.fade.show class="alert-#{class_name}"
+      button.close type="button" data-dismiss="alert"
+        span aria-hidden="true" &times;
+      = raw flash[key]
+      
+javascript:
+  setTimeout(function () {
+  console.log('doing it');
+    $('.alert-dismissible').alert('close');
+  }, 5000);

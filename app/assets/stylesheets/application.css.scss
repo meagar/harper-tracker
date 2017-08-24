@@ -13,3 +13,30 @@
  *= require_tree .
  *= require_self
  */
+@import 'bootstrap';
+
+body {
+  padding-top: 5rem;
+}
+
+.time-picker {
+  text-align: center;
+
+  .form-control {
+    display: inline-block;
+    width: 3em;
+    text-align: center;
+  }
+
+  span.seperator {
+    display: inline-block;
+    width: 1em;
+    text-align: center;
+  }
+}
+
+.feeding-type-picker {
+  label {
+    margin-right: 10px;
+  }
+}

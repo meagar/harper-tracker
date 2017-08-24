@@ -1,0 +1,30 @@
+
+.container-fluid
+  .row
+    .col
+      table.table.table-striped
+        tr
+          th Feeding #
+          td =@feeding.id
+        tr
+          th Started
+          td =l @feeding.start_time
+        tr
+          th Amount
+          td #{@feeding.amount} ml
+          
+        tr
+          th Type: 
+          td = ['milk', 'formula'].select { |type| @feeding.send(type) }.join('/')
+          
+  - if @feeding.notes.present?
+    .row
+      .col
+        h4 Notes
+        = @feeding.notes
+  .row
+    .col
+      hr
+      = link_to 'Edit', [:edit, @feeding], class: 'btn btn-primary btn-block'
+      = link_to 'Back', :feedings, class: 'btn btn-secondary btn-block'
+      = link_to 'Delete', @feeding, method: :delete, data: { confirm: 'Are you sure you want to delete this feeding?' }, class: 'btn btn-danger btn-block'

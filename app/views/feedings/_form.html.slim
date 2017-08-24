@@ -1,0 +1,81 @@
+= form_for feeding do |f|
+  .form-group style="color: #f00"
+    - if feeding.errors.any?
+      ul
+        - feeding.errors.full_messages.each do |error|
+          li = error
+  .form-group
+    - if feeding.created_at.present?
+      label Created At
+      input type="text" class="form-control" readonly=true value=(l feeding.created_at)
+    - else
+      label Current Time
+      input type="text" class="form-control" readonly=true value=(l DateTime.now)
+  .form-group
+    label Start Time
+    .time-picker data-time=(feeding.start_time ? feeding.start_time : Time.parse(rounded_time(Time.now)))
+      a#back-time.btn.btn-primary.form-control href="#" <
+      = f.text_field :start_hour, value: '', class: 'form-control'
+      span.seperator
+        | :
+      = f.text_field :start_minute, value: '', class: 'form-control'
+      = f.text_field :start_ampm, value: '', class: 'form-control'
+      a#forward-time.btn.btn-primary.form-control href="#" >
+
+  .form-group
+    = f.label :amount, 'Amount (ml)'
+    = f.number_field :amount, class: 'form-control', required: true
+  
+  .form-check.form-check-inline.feeding-type-picker
+    = f.label :milk, class: 'form-check-label' do
+      = f.check_box :milk, class: 'form-check-input'
+      | Milk
+    = f.label :formula, class: 'form-check-label' do
+      = f.check_box :formula, class: 'form-check-input'
+      | Formula
+  .from-group
+    = f.label :notes
+    = f.text_field :notes, class: 'form-control'
+  .form-group
+    hr
+    a.btn.btn-danger href=root_url style="width:50%" Cancel
+    button.btn.btn-primary style="width:50%" type="submit" Save
+
+
+javascript:
+  $(function () {
+    var time = new Date($('.time-picker').data('time'));
+    
+    function updateClock() {
+      var hours = time.getHours();
+      
+      var ampm = hours >= 12 ? 'pm' : 'am';
+      
+      if (hours > 12) {
+        hours -= 12;
+      }  
+    
+      var minutes = time.getMinutes();
+      if (minutes < 10) minutes = '0' + minutes.toString()
+    
+      
+      
+      $('#feeding_start_hour').val(hours);
+      $('#feeding_start_minute').val(minutes);
+      $('#feeding_start_ampm').val(ampm);
+    }
+
+    updateClock();
+    $('a#back-time').click(function (event) {
+      event.preventDefault();
+      time.setMinutes(time.getMinutes() - 15);
+      updateClock();
+    });
+    
+    $('a#forward-time').click(function (event) {
+      event.preventDefault();
+      time.setMinutes(time.getMinutes() + 15);
+      updateClock();
+    });
+  });
+    

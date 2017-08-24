@@ -1,0 +1,16 @@
+
+.container-fluid
+  table.table-striped.table-bordered style="width: 100%"
+    thead
+      tr
+        th Date
+        th M|F
+        th ml 
+        th N
+    tbody
+      - @feedings.each do |f|
+        tr
+          td= link_to l(f.created_at), f
+          td= [f.milk && 'M', f.formula && 'F'].select(&:presence).join('/')
+          td #{f.amount}ml
+          td= f.notes.present? ? '*' : ''
