@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources :changings
   resources :feedings
+  resources :weights, as: :weigh_ins
 
   get 'reports' => 'reports#index'
 end

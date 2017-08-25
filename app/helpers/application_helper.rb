@@ -5,4 +5,28 @@ module ApplicationHelper
     diff = (DateTime.now - BIRTH_TIME)
     "#{diff.to_i} days old"
   end
+
+  def hours_minutes_ago(time)
+    diff = (Time.now - time)
+
+    h = (diff / 3600).floor
+    m = ((diff - (h * 3600)) / 60).floor
+
+    if h > 0
+      if m > 0
+        "#{h}h #{m}m"
+      else
+        "#{h}h"
+      end
+    else
+      "#{m}m"
+    end
+  end
+
+  def lbs(g)
+    lbs = g * 0.00220462
+    oz = ((lbs - lbs.floor) * 16).round
+
+    "#{lbs.floor}, #{oz}"
+  end
 end

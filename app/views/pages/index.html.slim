@@ -7,9 +7,9 @@
       hr
     - if @last_feed  
       .form-group
-        h5 Last feed #{time_ago_in_words(@last_feed.start_time)} ago
-        h5 Last pee #{time_ago_in_words(@last_pee.change_time)} ago
-        h5 Last poop #{time_ago_in_words(@last_poop.change_time)} ago
+        h5 Last feed #{hours_minutes_ago(@last_feed.start_time)} ago
+        h5 Last pee #{hours_minutes_ago(@last_pee.change_time)} ago
+        h5 Last poop #{hours_minutes_ago(@last_poop.change_time)} ago
         
     .form-group  
       a.form-control.btn.btn-primary.btn-block href="/feedings/new" Record Feeding
@@ -17,3 +17,6 @@
     .form-group  
       a.form-control.btn.btn-primary.btn-block href="/changings/new" Record Diaper Change
         
+    .form-group  
+      a.form-control.btn.btn-primary.btn-block href="/weights/new" Record Weight
+      
