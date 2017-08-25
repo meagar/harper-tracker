@@ -15,7 +15,7 @@
       
   .form-group
     label Start Time
-    .time-picker data-time=(feeding.start_time ? feeding.start_time : Time.now)
+    .time-picker data-time=((feeding.start_time ? feeding.start_time : Time.now).strftime('%FT%T%:z'))
       a#back-time.btn.btn-primary.form-control href="#" <
       = f.text_field :start_hour, value: '', class: 'form-control'
       span.seperator
