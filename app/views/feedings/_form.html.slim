@@ -4,6 +4,7 @@
       ul
         - feeding.errors.full_messages.each do |error|
           li = error
+          
   .form-group
     - if feeding.created_at.present?
       label Created At
@@ -11,6 +12,7 @@
     - else
       label Current Time
       input type="text" class="form-control" readonly=true value=(l DateTime.now)
+      
   .form-group
     label Start Time
     .time-picker data-time=(feeding.start_time ? feeding.start_time : Time.now)
@@ -24,17 +26,22 @@
     
   .form-group
     = f.label :left_breast
-    = f.number_field :left_breast, class: 'form-control', required: true, default: 15
-    | min
+    .input-group
+      = f.number_field :left_breast, class: 'form-control', required: true
+      span.input-group-addon minutes
+      
   .form-group
     = f.label :right_breast
-    = f.number_field :left_breast, class: 'form-control', required: true, default: 15
-    | min
-  
+    .input-group
+      = f.number_field :right_breast, class: 'form-control', required: true
+      span.input-group-addon minutes
+      
   .form-group
     = f.label :amount, 'Amount (ml)'
-    = f.number_field :amount, class: 'form-control', required: true
-  
+    .input-group
+      = f.number_field :amount, class: 'form-control', required: true
+      span.input-group-addon ml
+      
   .form-check.form-check-inline.feeding-type-picker
     = f.label :milk, class: 'form-check-label' do
       = f.check_box :milk, class: 'form-check-input'

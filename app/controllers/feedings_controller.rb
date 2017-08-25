@@ -13,7 +13,7 @@ class FeedingsController < ApplicationController
   end
 
   def new
-    @feeding = Feeding.new
+    @feeding = Feeding.new(left_breast: 15, right_breast: 15)
   end
 
   def create
@@ -53,7 +53,7 @@ class FeedingsController < ApplicationController
   end
 
   def create_params
-    params.require(:feeding).permit(:amount, :formula, :milk, :notes).tap do |p|
+    params.require(:feeding).permit(:amount, :left_breast, :right_breast, :formula, :milk, :notes).tap do |p|
       p[:start_time] = Time.parse([params[:feeding][:start_hour], params[:feeding][:start_minute]].join(':') + params[:feeding].delete(:start_ampm))
     end
   end

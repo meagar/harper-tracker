@@ -14,5 +14,7 @@ module HarperTracker
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
     config.time_zone = 'Eastern Time (US & Canada)'
+
+    ActionView::Base.field_error_proc = proc { |html_tag, _instance| "<div class=\"has-error\">#{html_tag}</div>".html_safe }
   end
 end
