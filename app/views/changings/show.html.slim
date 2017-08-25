@@ -1,0 +1,30 @@
+
+.container-fluid
+  .row
+    .col
+      table.table.table-striped
+        tr
+          th Changing ID 
+          td =@changing.id
+        tr
+          th Time
+          td =l @changing.change_time
+        
+        tr
+          th Pee
+          td = t @changing.pee
+        tr
+          th Poop
+          td = t @changing.poop
+          
+  - if @changing.notes.present?
+    .row
+      .col
+        h4 Notes
+        = @feeding.notes
+  .row
+    .col
+      hr
+      = link_to 'Edit', [:edit, @changing], class: 'btn btn-primary btn-block'
+      = link_to 'Back', :changings, class: 'btn btn-secondary btn-block'
+      = link_to 'Delete', @changing, method: :delete, data: { confirm: 'Are you sure you want to delete this changing?' }, class: 'btn btn-danger btn-block'

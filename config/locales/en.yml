@@ -4,3 +4,11 @@ en:
       default: '%B %e, %l:%M %P'
       long: '%l:%M %P on %B, %e'
       short_time: '%l:%M %P'
+  no_poop: None
+  light_poop: Light
+  medium_poop: Medium
+  heavy_poop: Heavy
+  no_pee: None
+  light_pee: Light
+  medium_pee: Medium
+  heavy_pee: Heavy

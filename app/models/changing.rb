@@ -1,6 +1,7 @@
 # frozen-string-literal: true
 
 class Changing < ApplicationRecord
+  validates :change_time, presence: true
   validates :poop, presence: true
   validates :pee, presence: true
 

@@ -1,0 +1,49 @@
+- time = model.send(field) || Time.now
+.time-picker data-time=time.strftime('%FT%T%:z')
+  a#back-time.btn.btn-primary.form-control href="#" <
+  = f.text_field :start_hour, value: '', class: 'form-control'
+  span.seperator
+    | :
+  = f.text_field :start_minute, value: '', class: 'form-control'
+  = f.text_field :start_ampm, value: '', class: 'form-control'
+  a#forward-time.btn.btn-primary.form-control href="#" >
+
+
+javascript:
+  var modelName = "#{model.class.name.downcase}"
+  
+  $(function () {
+    var time = moment($('.time-picker').data('time'));
+
+    window.time = time
+    function updateClock() {
+      var hour = time.hour();
+      var minutes = time.minute();
+      
+      var m = (parseInt((minutes + 7.5)/15) * 15) % 60;
+      var h = minutes > 52 ? (hour === 23 ? 0 : ++hour) : hour;  
+  
+      if (m < 9) m = '0' + m.toString();
+      var ampm = h >= 12 ? 'pm' : 'am';
+      if (h > 12) h -= 12;
+      
+      $('#' + modelName + '_start_hour').val(h);
+      $('#' + modelName + '_start_minute').val(m);
+      $('#' + modelName + '_start_ampm').val(ampm);
+    }
+
+    updateClock();
+    
+    $('a#back-time').click(function (event) {
+      event.preventDefault();
+      time.subtract(15, 'minutes');
+      updateClock();
+    });
+    
+    $('a#forward-time').click(function (event) {
+      event.preventDefault();
+      time.add(15, 'minutes');
+      updateClock();
+    });
+  });
+    

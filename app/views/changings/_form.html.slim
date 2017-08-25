@@ -1,0 +1,40 @@
+= form_for changing do |f|
+  = render 'form_errors', model: changing
+  
+  .form-group
+    - if changing.created_at.present?
+      label Created At
+      input type="text" class="form-control" readonly=true value=(l changing.created_at)
+    - else
+      label Current Time
+      input type="text" class="form-control" readonly=true value=(l DateTime.now)
+      
+  .form-group
+    label Start Time
+    = render 'time_picker', model: changing, field: :change_time, f: f
+    
+  .form-group
+    label Pee
+    .col-md-7
+      .btn-group data-toggle="buttons"
+        - Changing.pees.keys.each do |key|
+          label.btn.btn-secondary class=(changing.pee == key && 'active')
+            = f.radio_button :pee, key
+            = t key
+  .form-group
+    label Poop
+    .col-md-7
+      .btn-group data-toggle="buttons"
+        - Changing.poops.keys.each do |key|
+          label.btn.btn-secondary class=(changing.poop == key && 'active')
+            = f.radio_button :poop, key
+            = t key
+            
+  .from-group
+    = f.label :notes
+    = f.text_field :notes, class: 'form-control'
+  
+  .form-group
+    hr
+    a.btn.btn-danger href=root_url style="width:50%" Cancel
+    button.btn.btn-primary style="width:50%" type="submit" Save

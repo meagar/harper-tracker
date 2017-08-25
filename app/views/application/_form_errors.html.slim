@@ -1,0 +1,5 @@
+.form-group style="color: #f00"
+  - if model.errors.any?
+    ul
+      - model.errors.full_messages.each do |error|
+        li = error

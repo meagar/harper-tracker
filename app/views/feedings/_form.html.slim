@@ -1,10 +1,5 @@
 = form_for feeding do |f|
-  .form-group style="color: #f00"
-    - if feeding.errors.any?
-      ul
-        - feeding.errors.full_messages.each do |error|
-          li = error
-          
+  = render 'form_errors', model: feeding
   .form-group
     - if feeding.created_at.present?
       label Created At
@@ -15,15 +10,8 @@
       
   .form-group
     label Start Time
-    .time-picker data-time=((feeding.start_time ? feeding.start_time : Time.now).strftime('%FT%T%:z'))
-      a#back-time.btn.btn-primary.form-control href="#" <
-      = f.text_field :start_hour, value: '', class: 'form-control'
-      span.seperator
-        | :
-      = f.text_field :start_minute, value: '', class: 'form-control'
-      = f.text_field :start_ampm, value: '', class: 'form-control'
-      a#forward-time.btn.btn-primary.form-control href="#" >
-    
+    = render 'time_picker', model: feeding, field: :start_time, f: f
+
   .form-group
     = f.label :left_breast
     .input-group
@@ -37,7 +25,7 @@
       span.input-group-addon minutes
       
   .form-group
-    = f.label :amount, 'Amount (ml)'
+    = f.label :amount, 'Amount'
     .input-group
       = f.number_field :amount, class: 'form-control', required: true, pattern: '[0-9]*'
       span.input-group-addon ml
@@ -49,47 +37,12 @@
     = f.label :formula, class: 'form-check-label' do
       = f.check_box :formula, class: 'form-check-input'
       | Formula
+      
   .from-group
     = f.label :notes
     = f.text_field :notes, class: 'form-control'
+    
   .form-group
     hr
     a.btn.btn-danger href=root_url style="width:50%" Cancel
     button.btn.btn-primary style="width:50%" type="submit" Save
-
-
-javascript:
-  $(function () {
-    var time = moment($('.time-picker').data('time'));
-
-    window.time = time
-    function updateClock() {
-      var hour = time.hour();
-      var minutes = time.minute();
-      
-      var m = (parseInt((minutes + 7.5)/15) * 15) % 60;
-      var h = minutes > 52 ? (hour === 23 ? 0 : ++hour) : hour;  
-  
-      if (m < 9) m = '0' + m.toString();
-      var ampm = h >= 12 ? 'pm' : 'am';
-      if (h > 12) h -= 12;
-      
-      $('#feeding_start_hour').val(h);
-      $('#feeding_start_minute').val(m);
-      $('#feeding_start_ampm').val(ampm);
-    }
-
-    updateClock();
-    $('a#back-time').click(function (event) {
-      event.preventDefault();
-      time.subtract(15, 'minutes');
-      updateClock();
-    });
-    
-    $('a#forward-time').click(function (event) {
-      event.preventDefault();
-      time.add(15, 'minutes');
-      updateClock();
-    });
-  });
-    
