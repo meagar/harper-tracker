@@ -52,10 +52,7 @@ class ChangingsController < ApplicationController
 
   def create_params
     params.require(:changing).permit(:poop, :pee, :notes).tap do |p|
-      h = params[:changing][:start_hour]
-      m = params[:changing][:start_minute]
-      am = params[:changing][:start_ampm]
-      p[:change_time] = Time.parse("#{h}:#{m}#{am}")
+      p[:change_time] = extract_time_param(:changing)
     end
   end
 

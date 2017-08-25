@@ -1,5 +1,5 @@
 - time = model.send(field) || Time.now
-.time-picker data-time=time.strftime('%FT%T%:z')
+.time-picker data-time=time.as_json
   a#back-time.btn.btn-primary.form-control href="#" <
   = f.text_field :start_hour, value: '', class: 'form-control'
   span.seperator
@@ -8,6 +8,7 @@
   = f.text_field :start_ampm, value: '', class: 'form-control'
   a#forward-time.btn.btn-primary.form-control href="#" >
 
+  = f.text_field :start_date, value: '', class: 'form-control date', readonly: true
 
 javascript:
   var modelName = "#{model.class.name.downcase}"
@@ -30,6 +31,9 @@ javascript:
       $('#' + modelName + '_start_hour').val(h);
       $('#' + modelName + '_start_minute').val(m);
       $('#' + modelName + '_start_ampm').val(ampm);
+    
+      var date = time.format('ddd MMM Do');
+      $('#' + modelName + '_start_date').val(date);
     }
 
     updateClock();
