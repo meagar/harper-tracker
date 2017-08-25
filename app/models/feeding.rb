@@ -2,6 +2,8 @@
 
 class Feeding < ApplicationRecord
   validates :start_time, presence: true
+  validates :left_breast, presence: true
+  validates :right_breast, presence: true
   validates :amount, presence: true
   validates :formula, inclusion: { in: [true, false] }
   validates :milk, inclusion: { in: [true, false] }

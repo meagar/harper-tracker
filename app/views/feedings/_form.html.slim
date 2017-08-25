@@ -21,7 +21,16 @@
       = f.text_field :start_minute, value: '', class: 'form-control'
       = f.text_field :start_ampm, value: '', class: 'form-control'
       a#forward-time.btn.btn-primary.form-control href="#" >
-
+    
+  .form-group
+    = f.label :left_breast
+    = f.number_field :left_breast, class: 'form-control', required: true, default: 15
+    | min
+  .form-group
+    = f.label :right_breast
+    = f.number_field :left_breast, class: 'form-control', required: true, default: 15
+    | min
+  
   .form-group
     = f.label :amount, 'Amount (ml)'
     = f.number_field :amount, class: 'form-control', required: true
@@ -44,15 +53,15 @@
 
 javascript:
   $(function () {
-    var time = new Date($('.time-picker').data('time'));
+    var time = moment($('.time-picker').data('time'));
 
-  
+    window.time = time
     function updateClock() {
-      var hours = time.getHours();
-      var minutes = time.getMinutes();
+      var hour = time.hour();
+      var minutes = time.minute();
       
       var m = (parseInt((minutes + 7.5)/15) * 15) % 60;
-      var h = minutes > 52 ? (hours === 23 ? 0 : ++hours) : hours;  
+      var h = minutes > 52 ? (hour === 23 ? 0 : ++hour) : hour;  
   
       if (m < 9) m = '0' + m.toString();
       var ampm = h >= 12 ? 'pm' : 'am';
@@ -66,13 +75,13 @@ javascript:
     updateClock();
     $('a#back-time').click(function (event) {
       event.preventDefault();
-      time.setMinutes(time.getMinutes() - 15);
+      time.subtract(15, 'minutes');
       updateClock();
     });
     
     $('a#forward-time').click(function (event) {
       event.preventDefault();
-      time.setMinutes(time.getMinutes() + 15);
+      time.add(15, 'minutes');
       updateClock();
     });
   });
