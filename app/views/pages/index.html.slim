@@ -8,7 +8,9 @@
     - if @last_feed  
       .form-group
         h5 Last feed #{time_ago_in_words(@last_feed.start_time)} ago
-        h5 at #{l @last_feed.start_time}
+        h5 Last pee #{time_ago_in_words(@last_pee.change_time)} ago
+        h5 Last poop #{time_ago_in_words(@last_poop.change_time)} ago
+        
     .form-group  
       a.form-control.btn.btn-primary.btn-block href="/feedings/new" Record Feeding
       
