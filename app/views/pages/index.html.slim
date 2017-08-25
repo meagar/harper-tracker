@@ -2,9 +2,8 @@
 .container
   form 
   
-    .form-group
-      h5 It's #{l Time.now, format: :long}
-      hr
+    .form-group.clock
+
     - if @last_feed  
       .form-group
         table.last-times
@@ -24,9 +23,6 @@ javascript:
     var diff = moment.duration(moment(t1).diff(t2));
     var h = diff.hours();
     var m = diff.minutes();
-    if (m && m < 9) {
-      m = '0' + m.toString();
-    }
     
     if (h && m) {
       return h + 'h ' + m + 'm';
@@ -37,7 +33,7 @@ javascript:
     }
   }
   
-  var app = new Vue({
+  var lastTimes = new Vue({
     el: 'table.last-times',
     template: `
       <table class="last-times table-bordered">
@@ -74,3 +70,25 @@ javascript:
       lastPoop() { return diff(this.now, this.lastPoopAt); },
     }
   });
+  
+  var clock = new Vue({
+    el: '.clock',
+    template: `
+      <div class="form-group clock">
+        <b>{{time}}</b>
+        <hr/>
+      </div>`,
+    data() {
+      return {
+        time: this.computeTime(),
+      }
+    },
+    mounted() {
+      setInterval(() => { this.time = this.computeTime() }, 60 * 1000);
+    },
+    methods: {
+      computeTime() {
+        return moment().format('h:mm a, ddd MMM Do')
+      }
+    }
+  })
