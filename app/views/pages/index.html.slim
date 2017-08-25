@@ -7,16 +7,70 @@
       hr
     - if @last_feed  
       .form-group
-        h5 Last feed #{hours_minutes_ago(@last_feed.start_time)} ago
-        h5 Last pee #{hours_minutes_ago(@last_pee.change_time)} ago
-        h5 Last poop #{hours_minutes_ago(@last_poop.change_time)} ago
+        table.last-times
         
     .form-group  
-      a.form-control.btn.btn-primary.btn-block href="/feedings/new" Record Feeding
+      a.form-control.btn.btn-primary.btn-block.btn-lg href="/feedings/new" Record Feeding
       
     .form-group  
-      a.form-control.btn.btn-primary.btn-block href="/changings/new" Record Diaper Change
+      a.form-control.btn.btn-primary.btn-block.btn-lg href="/changings/new" Record Diaper Change
         
     .form-group  
-      a.form-control.btn.btn-primary.btn-block href="/weights/new" Record Weight
-      
+      a.form-control.btn.btn-primary.btn-block.btn-lg href="/weights/new" Record Weight
+
+javascript:
+    
+  function diff(t1, t2) {
+    var diff = moment(moment(t1).diff(t2));
+    var h = diff.hours();
+    var m = diff.minutes();
+    if (m && m < 9) {
+      m = '0' + m.toString();
+    }
+    
+    if (h && m) {
+      return h + 'h ' + m + 'm';
+    } else if (h) {
+      return h + 'h';
+    } else {
+      return m + 'm';
+    }
+  }
+  
+  var app = new Vue({
+    el: 'table.last-times',
+    template: `
+      <table class="last-times table-bordered">
+        <tr>
+          <th>Last feed</th>
+          <td>{{lastFeed}} ago</td>
+        </tr>
+        <tr>
+          <th>Last pee</th>
+          <td>{{lastPee}} ago</td>
+        </tr>
+        <tr>
+          <th>Last poop</th>
+          <td>{{lastPoop}} ago</td>
+        </tr>
+      </table>`,
+    data() { 
+      return {
+        lastFeedAt: '#{@last_feed.start_time.as_json}',
+        lastPeeAt: '#{@last_pee.change_time.as_json}',
+        lastPoopAt: '#{@last_poop.change_time.as_json}'
+      };
+    },
+  
+    props: ['now'],
+  
+    mounted() {
+      setInterval(() => { this.now = new Date(); }, 60 * 1000);
+    },
+    
+    computed: {
+      lastFeed() { return diff(this.now, this.lastFeedAt); },
+      lastPee() { return diff(this.now, this.lastPeeAt); },
+      lastPoop() { return diff(this.now, this.lastPoopAt); },
+    }
+  });

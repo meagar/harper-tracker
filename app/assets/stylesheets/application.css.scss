@@ -17,6 +17,7 @@
 
 body {
   padding-top: 5rem;
+  padding-bottom: 5rem;
 }
 
 .time-picker {
@@ -49,4 +50,20 @@ body {
 .btn-group label.btn.active {
   color: #fff;
   background: #868e96;
+}
+
+.form-group.form-submit {
+  .btn {
+    width: 50%;
+  }
+}
+
+table.last-times {
+  width: 100%;
+  th, td {
+    padding: 5px 10px;
+  }
+  th {
+    background: #ddd;
+  }
 }
