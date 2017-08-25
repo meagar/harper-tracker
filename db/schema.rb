@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170825023606) do
+ActiveRecord::Schema.define(version: 20170825123057) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20170825023606) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "change_time", null: false
+    t.index ["change_time"], name: "index_changings_on_change_time"
   end
 
   create_table "feedings", force: :cascade do |t|
@@ -35,6 +36,7 @@ ActiveRecord::Schema.define(version: 20170825023606) do
     t.datetime "start_time", null: false
     t.integer "left_breast", null: false
     t.integer "right_breast", null: false
+    t.index ["start_time"], name: "index_feedings_on_start_time"
   end
 
   create_table "weigh_ins", force: :cascade do |t|
@@ -43,6 +45,7 @@ ActiveRecord::Schema.define(version: 20170825023606) do
     t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["weigh_time"], name: "index_weigh_ins_on_weigh_time"
   end
 
 end
