@@ -18,3 +18,7 @@ nav.navbar.navbar-expand-md.navbar-dark.bg-dark.fixed-top
        
       / li.nav-item
       /   a.nav-link href=reports_path class=(controller_name == 'reports' && 'active') Reports
+      
+      li.nav-item.pull-right
+        = link_to "Logout #{current_user.name}", logout_path, method: :post, class: 'nav-link'
+  

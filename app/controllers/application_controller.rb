@@ -3,8 +3,14 @@ class ApplicationController < ActionController::Base
 
   before_action :require_user
 
+  helper_method :current_user
+
   def require_user
-    nil
+    redirect_to '/auth/google_oauth2' unless current_user
+  end
+
+  def current_user
+    @current_user ||= User.find_by(email: session[:current_user]) if session[:current_user]
   end
 
   def extract_time_param(name)
