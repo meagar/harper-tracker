@@ -1,0 +1,21 @@
+
+.container
+  h4 Reports
+  
+  .row
+    .col
+      h5 Last 24 Hours
+    
+      table.table.table-bordered.table-striped
+        tr
+          th Feedings
+          td = Feeding.last_24.count
+        tr
+          th Pees
+          td = Changing.with_pee.last_24.count
+        tr
+          th Poops
+          td = Changing.with_poop.last_24.count
+      
+      
+      

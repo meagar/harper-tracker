@@ -5,4 +5,6 @@ Rails.application.routes.draw do
 
   resources :changings
   resources :feedings
+
+  get 'reports' => 'reports#index'
 end

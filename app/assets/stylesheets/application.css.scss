@@ -40,3 +40,13 @@ body {
     margin-right: 10px;
   }
 }
+
+.btn-group label.btn {
+  color: #000;
+  background-color: #ddd;
+}
+
+.btn-group label.btn.active {
+  color: #fff;
+  background: #868e96;
+}

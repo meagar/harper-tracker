@@ -18,7 +18,7 @@
     .col-md-7
       .btn-group data-toggle="buttons"
         - Changing.pees.keys.each do |key|
-          label.btn.btn-secondary class=(changing.pee == key && 'active')
+          label.btn.btn-secondary class=(changing.pee == key ? 'active' : nil)
             = f.radio_button :pee, key
             = t key
   .form-group
@@ -26,7 +26,7 @@
     .col-md-7
       .btn-group data-toggle="buttons"
         - Changing.poops.keys.each do |key|
-          label.btn.btn-secondary class=(changing.poop == key && 'active')
+          label.btn.btn-secondary class=(changing.poop == key ? 'active' : nil)
             = f.radio_button :poop, key
             = t key
             
