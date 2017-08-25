@@ -21,7 +21,7 @@
 javascript:
     
   function diff(t1, t2) {
-    var diff = moment(moment(t1).diff(t2));
+    var diff = moment.duration(moment(t1).diff(t2));
     var h = diff.hours();
     var m = diff.minutes();
     if (m && m < 9) {
