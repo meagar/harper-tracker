@@ -15,12 +15,16 @@
   .form-group
     = f.label :left_breast
     .input-group
+      span.input-group-btn
+        button.btn.btn-seconary type="button" ✖
       = f.number_field :left_breast, class: 'form-control', required: true, pattern: '[0-9]*'
       span.input-group-addon minutes
       
   .form-group
     = f.label :right_breast
     .input-group
+      span.input-group-btn
+        button.btn.btn-seconary type="button" ✖
       = f.number_field :right_breast, class: 'form-control', required: true, pattern: '[0-9]*'
       span.input-group-addon minutes
       
@@ -49,5 +53,9 @@
 
 javascript:
   $(function () {
-      $('input:text').focus(function() { this.setSelectionRange(0, 9999); });
+    $('.input-group button.btn').click(function (event) {
+      event.preventDefault();
+      console.log('click');
+      $(this).closest('.input-group').find('input').val(0);
     })
+  });
