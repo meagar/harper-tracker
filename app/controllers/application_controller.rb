@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def require_user
-    redirect_to '/auth/facebook' unless current_user
+    redirect_to '/auth/google_oauth2' unless current_user
   end
 
   def current_user
