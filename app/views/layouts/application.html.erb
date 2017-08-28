@@ -12,6 +12,13 @@
     <%= javascript_include_tag 'application' %>
     <script>
       $(document).on('click', 'a', function(event) {
+        var href = $(event.target).attr('href');
+
+        if (href === '#' || !href) {
+          alert('no')
+          return;
+        }
+
         event.preventDefault();
         location.href = $(event.target).attr('href');
       });

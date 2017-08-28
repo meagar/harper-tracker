@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
+    return User.first if Rails.env.development? #NOCOMMIT
     @current_user ||= User.find_by(email: session[:current_user]) if session[:current_user]
   end
 
