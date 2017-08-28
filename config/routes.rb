@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   get 'reports' => 'reports#index'
 
-  get '/auth/google_oauth2/callback' => 'sessions#create'
+  get '/auth/facebook/callback' => 'sessions#create'
 
   post '/logout' => 'sessions#destroy'
 end
