@@ -22,7 +22,6 @@ class WeightsController < ApplicationController
   private
 
   def create_params
-    binding.pry
     params.require(:weigh_in).permit(:weigh_time, :weight, :notes)
   end
 end
