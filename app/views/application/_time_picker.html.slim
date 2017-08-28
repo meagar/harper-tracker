@@ -16,7 +16,11 @@ javascript:
   $(function () {
     var time = moment($('.time-picker').data('time'));
 
-    window.time = time
+    var $hour = $('#' + modelName + '_start_hour');
+    var $minute = $('#' + modelName + '_start_minute');
+    var $ampm = $('#' + modelName + '_start_ampm');
+    var $date = $('#' + modelName + '_start_date');
+    
     function updateClock() {
       var hour = time.hour();
       var minutes = time.minute();
@@ -28,12 +32,10 @@ javascript:
       var ampm = h >= 12 ? 'pm' : 'am';
       if (h > 12) h -= 12;
       
-      $('#' + modelName + '_start_hour').val(h);
-      $('#' + modelName + '_start_minute').val(m);
-      $('#' + modelName + '_start_ampm').val(ampm);
-    
-      var date = time.format('ddd MMM Do');
-      $('#' + modelName + '_start_date').val(date);
+      $hour.val(h);
+      $minute.val(m);
+      $ampm.val(ampm);
+      $date.val(time.format('ddd MMM Do'));
     }
 
     updateClock();

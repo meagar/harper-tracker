@@ -5,8 +5,6 @@
     <%= csrf_meta_tags %>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
@@ -21,13 +19,7 @@
     <% if flash[:notice] || flash[:error] %>
       <%= render 'flash' %>
     <% end %>
-    <%= yield %>
 
-    <script>
-    $('a').filter(function (e) { return $(e).attr('href') !== '#' }).click(function(event) {
-      event.preventDefault();
-      location.href = $(event.target).attr('href');
-    });
-    </script>
+    <%= yield %>
   </body>
 </html>
