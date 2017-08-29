@@ -41,7 +41,7 @@ class CrudController < ApplicationController
 
   def destroy
     singular.destroy
-    redirect_to :root, notice: "#{model_class.name} deleted"
+    redirect_to :root, notice: "#{model_class.name.underscore.humanize} deleted"
   end
 
   protected
@@ -55,11 +55,11 @@ class CrudController < ApplicationController
   end
 
   def singular_record_name
-    controller_name.singularize
+    model_class.name.underscore
   end
 
   def plural_record_name
-    controller_name
+    model_class.name.tableize
   end
 
   def record_link(_)
