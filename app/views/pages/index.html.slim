@@ -52,12 +52,17 @@ javascript:
           <th>Last poop</th>
           <td>{{lastPoop}} ago</td>
         </tr>
+        <tr>
+          <th>Last pump</th>
+          <td>{{lastPump}}</td>
+        </tr>
       </table>`,
     data() { 
       return {
         lastFeedAt: '#{@last_feed.start_time.as_json}',
         lastPeeAt: '#{@last_pee.change_time.as_json}',
         lastPoopAt: '#{@last_poop.change_time.as_json}'
+        lastPumpAt: '#{@last_pump.pump_time.as_json}'
       };
     },
   
@@ -71,6 +76,7 @@ javascript:
       lastFeed() { return diff(this.now, this.lastFeedAt); },
       lastPee() { return diff(this.now, this.lastPeeAt); },
       lastPoop() { return diff(this.now, this.lastPoopAt); },
+      lastPump() { return diff(this.now, this.lastPumpAt); },
     }
   });
   
