@@ -1,56 +1,45 @@
-= form_for feeding do |f|
-  = render 'form_errors', model: feeding
-  .form-group
-    - if feeding.created_at.present?
-      label Created At
-      input type="text" class="form-control" readonly=true value=(l feeding.created_at)
-    - else
-      label Current Time
-      input type="text" class="form-control" readonly=true value=(l DateTime.now)
-      
-  .form-group
-    label Start Time
-    = render 'time_picker', model: feeding, field: :start_time, f: f
-
-  .form-group
-    = f.label :left_breast
-    .input-group
-      span.input-group-btn
-        button.btn.btn-seconary type="button" ✖
-      = f.number_field :left_breast, class: 'form-control', required: true, pattern: '[0-9]*'
-      span.input-group-addon minutes
-      
-  .form-group
-    = f.label :right_breast
-    .input-group
-      span.input-group-btn
-        button.btn.btn-seconary type="button" ✖
-      = f.number_field :right_breast, class: 'form-control', required: true, pattern: '[0-9]*'
-      span.input-group-addon minutes
-      
-  .form-group
-    = f.label :amount, 'Amount'
-    .input-group
-      = f.number_field :amount, class: 'form-control', required: true, pattern: '[0-9]*'
-      span.input-group-addon ml
-      
-  .form-check.form-check-inline.feeding-type-picker
-    = f.label :milk, class: 'form-check-label' do
-      = f.check_box :milk, class: 'form-check-input'
-      | Milk
-    = f.label :formula, class: 'form-check-label' do
-      = f.check_box :formula, class: 'form-check-input'
-      | Formula
-      
-  .from-group
-    = f.label :notes
-    = f.text_field :notes, class: 'form-control'
+.form-group
+  - if feeding.created_at.present?
+    label Created At
+    input type="text" class="form-control" readonly=true value=(l feeding.created_at)
+  - else
+    label Current Time
+    input type="text" class="form-control" readonly=true value=(l DateTime.now)
     
-  .form-group.form-submit
-    hr
-    a.btn.btn-danger.btn-lg href=root_url Cancel
-    button.btn.btn-primary.btn-lg style="width:50%" Save
+.form-group
+  label Start Time
+  = render 'time_picker', model: feeding, field: :start_time, f: f
 
+.form-group
+  = f.label :left_breast
+  .input-group
+    span.input-group-btn
+      button.btn.btn-seconary type="button" ✖
+    = f.number_field :left_breast, class: 'form-control', required: true, pattern: '[0-9]*'
+    span.input-group-addon minutes
+    
+.form-group
+  = f.label :right_breast
+  .input-group
+    span.input-group-btn
+      button.btn.btn-seconary type="button" ✖
+    = f.number_field :right_breast, class: 'form-control', required: true, pattern: '[0-9]*'
+    span.input-group-addon minutes
+    
+.form-group
+  = f.label :amount, 'Amount'
+  .input-group
+    = f.number_field :amount, class: 'form-control', required: true, pattern: '[0-9]*'
+    span.input-group-addon ml
+    
+.form-check.form-check-inline.feeding-type-picker
+  = f.label :milk, class: 'form-check-label' do
+    = f.check_box :milk, class: 'form-check-input'
+    | Milk
+  = f.label :formula, class: 'form-check-label' do
+    = f.check_box :formula, class: 'form-check-input'
+    | Formula
+    
 javascript:
   $(function () {
     $('.input-group button.btn').click(function (event) {

@@ -1,0 +1,16 @@
+.form-group
+  label Pump Time
+  = render 'time_picker', model: pumping, field: :pump_time, f: f
+
+.form-group
+  = f.label :left, 'Left breast'
+  .input-group
+    = f.number_field :left, class: 'form-control', required: true, pattern: '[0-9]*'
+    span.input-group-addon ml
+    
+.form-group
+  = f.label :right , 'Right breast'
+  .input-group
+    = f.number_field :right, class: 'form-control', required: true, pattern: '[0-9]*'
+    span.input-group-addon ml
+    

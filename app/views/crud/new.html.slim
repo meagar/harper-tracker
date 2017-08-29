@@ -1,0 +1,9 @@
+
+.container
+  .row
+    .col
+      h4 New #{model_class.name.titleize}
+  
+  .row
+    .col
+      = render 'form_wrapper', singular_record_name.to_sym => singular

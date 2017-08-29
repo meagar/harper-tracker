@@ -1,0 +1,14 @@
+= form_for singular do |f|
+  = render 'form_errors', model: singular
+  
+  = render 'form', f: f, singular_record_name.to_sym => singular
+  
+  - if singular.respond_to?(:notes)
+    .from-group
+      = f.label :notes
+      = f.text_field :notes, class: 'form-control'
+    
+  .form-group.form-submit
+    hr
+    a.btn.btn-danger.btn-lg href=root_url Cancel
+    button.btn.btn-primary.btn-lg style="width:50%" Save

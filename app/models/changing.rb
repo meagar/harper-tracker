@@ -5,6 +5,8 @@ class Changing < ApplicationRecord
   validates :poop, presence: true
   validates :pee, presence: true
 
+  default_scope -> { order(change_time: :desc) }
+
   scope :last_24, -> { where('change_time >= ?', 24.hours.ago) }
 
   scope :with_pee, -> { where('pee > 0') }

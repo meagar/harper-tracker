@@ -5,10 +5,12 @@ class CrudController < ApplicationController
 
   before_action :find_singular_record, only: %i(show edit update destroy)
 
+  helper_method :model_class, :singular_record_name, :singular
+
   include ApplicationHelper
 
   def index
-    self.plural = index_ordering
+    self.plural = model_class.all
   end
 
   def show
@@ -50,10 +52,6 @@ class CrudController < ApplicationController
     controller_name.singularize.titleize.constantize
   end
 
-  def index_ordering
-    model_class.order(id: :desc)
-  end
-
   def singular_record_name
     model_class.name.underscore
   end
@@ -71,7 +69,7 @@ class CrudController < ApplicationController
   end
 
   def permitted_create_params
-    raise 'Define me in sub-class'
+    %i(notes)
   end
 
   def permitted_update_params
@@ -107,5 +105,4 @@ class CrudController < ApplicationController
   def plural
     instance_variable_get("@#{plural_record_name}")
   end
-
 end

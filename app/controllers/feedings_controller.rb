@@ -4,7 +4,7 @@ class FeedingsController < CrudController
   protected
 
   def permitted_create_params
-    %i(amount left_breast right_breast formula milk notes)
+    super + %i(amount left_breast right_breast formula milk)
   end
 
   def create_params

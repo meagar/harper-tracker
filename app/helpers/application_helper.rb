@@ -1,6 +1,16 @@
 module ApplicationHelper
   BIRTH_TIME = DateTime.parse('August 16 5:41:00 EST')
 
+  def nav_items
+    {
+      feedings: 'Feedings',
+      changings: 'Diaper Changes',
+      weigh_ins: 'Weigh-Ins',
+      pumpings: 'Pumpings',
+      reports: 'Reports'
+    }
+  end
+
   def current_age
     diff = (DateTime.now - BIRTH_TIME)
     "#{diff.to_i} days old"

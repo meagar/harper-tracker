@@ -10,6 +10,8 @@ class Feeding < ApplicationRecord
 
   validate :must_have_formula_or_milk
 
+  default_scope -> { order(start_time: :desc) }
+
   scope :last_24, -> { where('start_time >= ?', 24.hours.ago) }
 
   private

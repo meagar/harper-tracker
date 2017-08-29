@@ -1,32 +1,21 @@
-= form_for weigh_in do |f|
-  = render 'form_errors', model: weigh_in
-  .form-group
-    - if weigh_in.created_at.present?
-      label Created At
-      input type="text" class="form-control" readonly=true value=(l weigh_in.created_at)
-    - else
-      label Current Time
-      input type="text" class="form-control" readonly=true value=(l DateTime.now)
-      
-  .form-group.weigh-on
-    label Weighed On
-    div.spacer(style="margin-bottom:15px")
-      = f.datetime_select :weigh_time, ampm: true, use_short_month: true, discard_year: true
-      
-    = f.label :amount, 'Weight'
-    .input-group
-      = f.number_field :weight, class: 'form-control', required: true, pattern: '[0-9]*'
-      span.input-group-addon g
-      
-  .from-group
-    = f.label :notes
-    = f.text_field :notes, class: 'form-control'
+.form-group
+  - if weigh_in.created_at.present?
+    label Created At
+    input type="text" class="form-control" readonly=true value=(l weigh_in.created_at)
+  - else
+    label Current Time
+    input type="text" class="form-control" readonly=true value=(l DateTime.now)
     
-  .form-group.form-submit
-    hr
-    a.btn.btn-danger.btn-lg href=root_url Cancel
-    button.btn.btn-primary.btn-lg type="submit" Save
+.form-group.weigh-on
+  label Weighed On
+  div.spacer(style="margin-bottom:15px")
+    = f.datetime_select :weigh_time, ampm: true, use_short_month: true, discard_year: true
     
+  = f.label :amount, 'Weight'
+  .input-group
+    = f.number_field :weight, class: 'form-control', required: true, pattern: '[0-9]*'
+    span.input-group-addon g
+
 javascript:
   $(function () {
     $('.weigh-on select').addClass('form-control').css({display: 'inline-block', width: 'auto'})

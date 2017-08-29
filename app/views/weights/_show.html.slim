@@ -1,0 +1,14 @@
+tr
+  th Weigh-In ID
+  td =@weigh_in.id
+tr
+  th Weighed At
+  td =l @weigh_in.weigh_time
+
+tr
+  th Weight (kg)
+  td #{@weigh_in.weight.fdiv(1000)} kg
+    
+tr
+  th Weight (lbs)
+  td = lbs @weigh_in.weight

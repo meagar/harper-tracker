@@ -1,0 +1,17 @@
+thead
+  tr
+    th Time
+    th L
+    th R
+    th T
+    Th N
+tbody
+  - @pumpings.each do |p|
+    tr
+      td= link_to l(p.pump_time, format: :short), p 
+      td= p.left
+      td= p.right
+      td= p.total
+      td= p.notes.present? ? '*' : ''
+
+       

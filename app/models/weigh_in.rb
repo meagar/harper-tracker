@@ -1,4 +1,5 @@
 class WeighIn < ApplicationRecord
-  validates :weight, presence: true
-  validates :weigh_time, presence: true
+  validates :weight, :weigh_time, presence: true
+
+  default_scope -> { order(weigh_time: :desc) }
 end

@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   resources :changings
   resources :feedings
   resources :weights, as: :weigh_ins
-
+  resources :pumpings
+  
   get 'reports' => 'reports#index'
 
   get '/auth/google_oauth2/callback' => 'sessions#create'

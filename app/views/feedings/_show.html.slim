@@ -1,0 +1,13 @@
+tr
+  th Feeding ID
+  td =@feeding.id
+tr
+  th Started
+  td =l @feeding.start_time
+
+tr
+  th Breast
+  td #{@feeding.left_breast} left / #{@feeding.right_breast} right
+tr
+  th Amount
+  td #{@feeding.amount} ml #{['milk', 'formula'].select { |type| @feeding.send(type) }.join('/')}

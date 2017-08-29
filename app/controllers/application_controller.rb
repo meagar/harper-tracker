@@ -1,7 +1,11 @@
+# frozen-string-literal: true
+
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   helper_method :current_user
+
+  protected
 
   def require_user
     redirect_to '/auth/google_oauth2' unless current_user

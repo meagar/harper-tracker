@@ -1,0 +1,18 @@
+
+.container-fluid
+  .row
+    .col
+      table.table.table-striped
+        = render 'show'
+          
+  - if singular.notes.present?
+    .row
+      .col
+        h4 Notes
+        = singular.notes
+  .row
+    .col
+      hr
+      = link_to 'Edit', [:edit, singular], class: 'btn btn-primary btn-block'
+      = link_to 'Back', model_class.name.tableize, class: 'btn btn-secondary btn-block'
+      = link_to 'Delete', singular, method: :delete, data: { confirm: "Are you sure you want to delete this #{model_class.name.titleize}?" }, class: 'btn btn-danger btn-block'
