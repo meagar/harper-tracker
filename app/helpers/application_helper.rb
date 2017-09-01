@@ -37,6 +37,11 @@ module ApplicationHelper
     lbs = g * 0.00220462
     oz = ((lbs - lbs.floor) * 16).round
 
+    if oz == 16
+      lbs += 1
+      oz = 0
+    end
+
     "#{lbs.floor}, #{oz}"
   end
 end
