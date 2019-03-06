@@ -1,14 +1,14 @@
 
 .container
-  form 
-  
+  form
+
     .form-group.clock
 
-    - if @last_feed  
+    - if @last_feed
       .form-group
         table.last-times
-        
-    .form-group  
+
+    .form-group
       a.form-control.btn.btn-primary.btn-block.btn-lg href="/feedings/new" Record Feeding
 
     / .form-group
@@ -17,16 +17,16 @@
     / .form-group
       a.form-control.btn.btn-primary.btn-block.btn-lg href="/pumpings/new" Record Pumping
 
-    / .form-group  
+    / .form-group
       a.form-control.btn.btn-primary.btn-block.btn-lg href="/weights/new" Record Weight
 
 javascript:
-    
+
   function diff(t1, t2) {
     var diff = moment.duration(moment(t1).diff(t2));
     var h = diff.hours();
     var m = diff.minutes();
-    
+
     if (h && m) {
       return h + 'h ' + m + 'm';
     } else if (h) {
@@ -35,7 +35,7 @@ javascript:
       return m + 'm';
     }
   }
-  
+
   var lastTimes = new Vue({
     el: 'table.last-times',
     template: `
@@ -57,21 +57,21 @@ javascript:
           <td>{{lastPump}}</td>
         </tr>
       </table>`,
-    data() { 
+    data() {
       return {
-        lastFeedAt: '#{@last_feed.start_time.as_json}',
-        lastPeeAt: '#{@last_pee.change_time.as_json}',
-        lastPoopAt: '#{@last_poop.change_time.as_json}',
-        lastPumpAt: '#{@last_pump.pump_time.as_json}',
+        lastFeedAt: '#{@last_feed&.start_time&.as_json}',
+        lastPeeAt: '#{@last_pee&.change_time&.as_json}',
+        lastPoopAt: '#{@last_poop&.change_time&.as_json}',
+        lastPumpAt: '#{@last_pump&.pump_time&.as_json}',
       };
     },
-  
+
     props: ['now'],
-  
+
     mounted() {
       setInterval(() => { this.now = new Date(); }, 60 * 1000);
     },
-    
+
     computed: {
       lastFeed() { return diff(this.now, this.lastFeedAt); },
       lastPee() { return diff(this.now, this.lastPeeAt); },
@@ -79,7 +79,7 @@ javascript:
       lastPump() { return diff(this.now, this.lastPumpAt); },
     }
   });
-  
+
   var clock = new Vue({
     el: '.clock',
     template: `

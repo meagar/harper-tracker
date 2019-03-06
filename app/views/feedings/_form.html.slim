@@ -5,7 +5,7 @@
   - else
     label Current Time
     input type="text" class="form-control" readonly=true value=(l DateTime.now)
-    
+
 .form-group
   label Start Time
   = render 'time_picker', model: feeding, field: :start_time, f: f
@@ -31,15 +31,15 @@
   .input-group
     = f.number_field :amount, class: 'form-control', required: true, pattern: '[0-9]*'
     span.input-group-addon ml
-    
+
 .form-check.form-check-inline.feeding-type-picker
   = f.label :milk, class: 'form-check-label' do
     = f.check_box :milk, class: 'form-check-input'
     | Milk
   = f.label :formula, class: 'form-check-label' do
-    = f.check_box :formula, true, class: 'form-check-input'
+    = f.check_box :formula, class: 'form-check-input', checked: true
     | Formula
-    
+
 javascript:
   $(function () {
     $('.input-group button.btn').click(function (event) {
