@@ -9,23 +9,23 @@
 .form-group
   label Start Time
   = render 'time_picker', model: feeding, field: :start_time, f: f
-
-.form-group
-  = f.label :left_breast
-  .input-group
-    span.input-group-btn
-      button.btn.btn-seconary type="button" ✖
-    = f.number_field :left_breast, class: 'form-control', required: true, pattern: '[0-9]*'
-    span.input-group-addon minutes
-    
-.form-group
-  = f.label :right_breast
-  .input-group
-    span.input-group-btn
-      button.btn.btn-seconary type="button" ✖
-    = f.number_field :right_breast, class: 'form-control', required: true, pattern: '[0-9]*'
-    span.input-group-addon minutes
-    
+/
+/ .form-group
+/   = f.label :left_breast
+/   .input-group
+/     span.input-group-btn
+/       button.btn.btn-seconary type="button" ✖
+/     = f.number_field :left_breast, class: 'form-control', required: true, pattern: '[0-9]*'
+/     span.input-group-addon minutes
+/
+/ .form-group
+/   = f.label :right_breast
+/   .input-group
+/     span.input-group-btn
+/       button.btn.btn-seconary type="button" ✖
+/     = f.number_field :right_breast, class: 'form-control', required: true, pattern: '[0-9]*'
+/     span.input-group-addon minutes
+/
 .form-group
   = f.label :amount, 'Amount'
   .input-group
@@ -37,7 +37,7 @@
     = f.check_box :milk, class: 'form-check-input'
     | Milk
   = f.label :formula, class: 'form-check-label' do
-    = f.check_box :formula, class: 'form-check-input'
+    = f.check_box :formula, true, class: 'form-check-input'
     | Formula
     
 javascript:
